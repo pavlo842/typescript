@@ -1,27 +1,26 @@
-// const Q = 1;
-
-// string
-let str: string = 'string!'; // : string - указание типа переменной
-
-// number
-let num: number = 10;
-
-// boolean
-let isTrue: boolean = true;
-let isFalse: boolean = false;
-
-isTrue = false; // 0 указывать нельзя
-isFalse = true; // 1 указывать нельзя
-
-// other
+// Array
 // 1-й способ
-let unknown: any = '1'; // any - в переменную можно записать любой тип данных
+let numArray1: number[] = [1, 2, 3]; // numArray: number[] - массив с типом number - лучше указать []
 
-unknown = 1;
-unknown = true;
+let strArray1: string[] = ['1', '2', '3'];
+
+let boolArray1: boolean[] = [true, false];
+
 
 // 2-й способ
-let some: string | number | boolean = '1'; // | - перечисление конкретных типов которые будут записаны в переменную
+let numArray2: Array<number> = [1, 2, 3];
 
-some = 1;
-some = false;
+let strArray2: Array<string> = ['1', '2', '3'];
+
+let boolArray2: Array<boolean> = [true, false];
+
+// Смешанные типы
+// tuples
+let array: [number, number, string] = [1, 2, '3'];
+console.log(array);
+
+let array2: Array<any> = [true, 'str', 22];
+console.log(array2);
+
+let array3: any[] = [true, 'str', 22];
+console.log(array3);
