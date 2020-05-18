@@ -1,23 +1,47 @@
 "use strict";
-// Classes
+// inheritance Classes
 class User {
-    // public job: string; // второй вариант в constructor -> ()
     constructor(name, job) {
+        this.name = name;
         this.job = job;
         this.age = 35; // protected - доступны внутри класса и у наследников класса (class -> extends, super())
-        this.name = name;
+        // this.name = name;
         // this.job = job; // второй вариант в ()
     }
     getAge() {
-        return this.age;
+        // меняется тип возвращаемых данных, то тут тоже надо менять тип
+        return this.age + '';
     }
-    setTitle(title) {
-        console.log(this.isTeacher);
-        this.isTeacher = title;
-        console.log(this.isTeacher);
+}
+class PPS extends User {
+    constructor(job) {
+        super('PPS', job); // вызов родительского конструтора
+        this.age = 100; // после вызова родительского конструтора через super - есть доступ ко всем полям в родителе, кроме private
+    }
+    getAge() {
+        return 'Hello ' + this.age;
     }
 }
 const user = new User('PPS', 'FE');
-console.log(user);
-user.setTitle(true); // Таким образом получили доступ к переменной private isTeacher
+const pps = new PPS('Frontend'); // создание экземпляра класса PPS
+// console.log(pps);
+// console.log(pps.getAge());
+// Создание Абстрактных классов - от которых нельзя делать экземпляры (объекты). Только наследование
+class Car {
+    constructor() {
+        this.year = 2010;
+    }
+    getCarYear() {
+        return this.year;
+    }
+}
+class Audi extends Car {
+    logInfo(info) {
+        console.log(info);
+    }
+}
+const audi = new Audi();
+console.log(audi);
+audi.logInfo('info');
+console.log(audi.getCarYear());
 //# sourceMappingURL=index.js.map
