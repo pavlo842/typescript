@@ -1,47 +1,44 @@
-// Декораторы - специальная возможность typescript по добавлению метадаты в классы или функции
+// Namespace
 
-// Функция декоратор
-// function logger(constrFn: Function) {
-//     console.log(constrFn);
+// function isEmpty(d: any): boolean {
+//     return !d;
 // }
 
-// function shouldLog(flag: boolean): any {
-//     return flag ? logger : null;
+// function isUndefined(d: any): boolean {
+//     return typeof d === 'undefined';
 // }
 
-// @shouldLog(true) // Что-бы закрепить декоратор за классом - нужно перед классом поставить @<name-decorator>
-// class User {
-//     constructor(
-//         public name: string,
-//         public age: number,
-//     ) {
-//         console.log('Hello world');
-//     }
-// }
+// console.log(isEmpty(''));
+// console.log(isEmpty('emp'));
+
+// console.log(isUndefined(20));
+// console.log(isUndefined(undefined));
+// console.log(isUndefined(null));
+
+// const PI = Math.PI;
+// const EXP = Math.E;
 
 
-// ===============================================================================
-// Функция декоратор
-function addShowAbility(constructorFn: Function) {
-    // функция для добавления метода в класс
-    constructorFn.prototype.showHtml = function() {
-        const pre = document.createElement('pre'); // переменная pre - в которую запишется созданный html элемент
-        pre.innerHTML = JSON.stringify(this); // установление html разметки и запись в нее объекта user в формате JSON
-        document.body.appendChild(pre); // добавление дочернего элемента на страницу
+// ================================================
+// синтаксис
+namespace Util {
+    // что-бы воспользоваться методами нужно заэкспортить каждый метод. По умолчанию private
+    export function isEmpty(d: any): boolean {
+        return !d;
     }
+    
+    export function isUndefined(d: any): boolean {
+        return typeof d === 'undefined';
+    }
+    
+    export const PI = Math.PI;
+    export const EXP = Math.E;
 }
 
-// Привязка к классу функции декоратора
-@addShowAbility
-class User {
-    constructor(
-        public name: string,
-        public age: number,
-        public job: string,
-    ) {}
-}
+const EXP = 'TEST';
 
-let user = new User('PPS', 20, 'FE');
-console.log(user);
+console.log(Util.isEmpty(''));
+console.log(Util.isEmpty('sss'));
+console.log(EXP);
+console.log(Util.EXP);
 
-(<any>user).showHtml(); // что-бы получить доступ к добавленному методу  нужно указать <any> перед объектом
