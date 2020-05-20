@@ -1,50 +1,42 @@
-// interfaces
-// Наследоваться можно более чем от одного интрфейса.
-// После наследования необходимо реализовать в классе минимальное коичество полей и методов, предусмотренных интерфейсом
-
-// interface Ilength {
-//     length: number;
+// Generic
+// function getter(data: any) {
+//     return data;
 // }
 
-// function getLength(variable: Ilength): void {
-//     console.log(variable.length);
-// }
-
-// const box = {
-//     name: 'PPS',
-//     length: 20
-// }
-
-// getLength(box);
+// console.log(getter(100));
+// console.log(getter('PPS'));
 
 
-interface IUser {
-    name: string;
-    age?: number;
-    logInfo(info: string): void;
+// ======================================================================
+// function on generic
+function genericGetter<T>/*тип который придет в функцию*/(data: T/*тип который передается в параметр*/): T/*тип который вернется из функции*/ {
+    return data;
 }
 
-interface IGetYear {
-    getYear(): number;
-}
+console.log(genericGetter('PPS').length);
+console.log(genericGetter(100));
 
-// const user: IUser = {
-//     name: 'PPS',
-//     age: 35,
-//     logInfo(info) {
-//         console.log('Info ', info);
-//     }
-// }
+let newGenericFunction/*переменная*/: <T>/*тип generic*/(data: T) => T/*функция возвращает тип Т*/ = genericGetter /*функция которая записывается в переменную newGenericFunction*/;
 
-// Создание класса по интерфейсу
+console.log(newGenericFunction('PPS').length);
+console.log(newGenericFunction(100));
 
-class User implements IUser, IGetYear { // Наследование от двух интерфейсов
-    name: string = 'pallo';
-    logInfo(info: string): void {
-        console.log(info);
-    }
 
-    getYear(): number {
-        return 200;
+// =======================================================================
+// Generic with class
+class Multiply<T extends number | string /*передаваемый тип наследуется от number | string*/> {
+    constructor(
+        private a: T,
+        private b: T,
+    ) {}
+
+    public getResult(): number {
+        return +this.a * Number(this.b);
     }
 }
+
+const mStr = new Multiply<string>('10', '10');
+console.log(mStr.getResult());
+
+const mNum = new Multiply<number>(10, 10);
+console.log(mNum.getResult());
